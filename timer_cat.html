@@ -22,8 +22,16 @@
 				75% { transform: rotate(45deg); }
 				100% { transform: rotate(0deg); }
 			}
+			
+			.animation_play {
+				animation-play-state: running;
+			}
+			
+			.animation_stop {
+				animation-play-state: paused;
+			}
 		
-			.cat-clock {
+			.timer_cat {
 				position: relative;
 				margin: 0 auto;
 				width: 180px;
@@ -32,7 +40,7 @@
 				z-index: -2;
 			}
 			
-			.cat-clock__head {
+			.timer_cat__head {
 				position: absolute;			
 				width: 100px;
 				height: 50px;
@@ -40,9 +48,11 @@
 				background-color: blue;
 				top: 52px;
 				left: calc(50% - 50px);
+				
+				animation-play-state: inherit;
 			}
 			
-			.cat-clock__ear {
+			.timer_cat__ear {
 				position: absolute;
 				width: 0; 
 				height: 0;
@@ -62,13 +72,15 @@
 				transform: rotate(20deg);
 			}
 			
-			.cat-clock__eye {
+			.timer_cat__eye {
 				position: absolute;
 				width: 30px;
 				height: 20px;
 				background-color: yellow;
 				border-radius: 50%;
 				top: 10px;
+				
+				animation-play-state: inherit;
 			}
 			
 			.left-eye {
@@ -79,7 +91,7 @@
 				right: 10px;
 			}
 			
-			.cat-clock__pupil {
+			.timer_cat__pupil {
 				position: absolute;
 				width: 12px;
 				height: 18px;
@@ -92,9 +104,11 @@
 				animation-duration: 2s;
 				animation-iteration-count: infinite;
 				animation-timing-function: linear;
+				
+				animation-play-state: inherit;
 			}
 			
-			.cat-clock__body {
+			.timer_cat__body {
 				position: absolute;
 				width: 150px;
 				height: 180px;
@@ -102,9 +116,11 @@
 				background-color: blue;
 				top: 100px;
 				left: calc(50% - 75px);
+				
+				animation-play-state: inherit;
 			}
 			
-			.cat-clock__clock {
+			.timer_cat__clock {
 				position: absolute;
 				width: 120px;
 				height: 120px;
@@ -112,9 +128,11 @@
 				background-color: pink;
 				top: 30px;
 				left: 15px;
+				
+				animation-play-state: inherit;
 			}
 			
-			.cat-clock__sec-arrow {
+			.timer_cat__sec-arrow {
 				position: absolute;
 				width: 2px;
 				height: 60px;
@@ -126,9 +144,11 @@
 				animation-duration: 60s;
 				animation-iteration-count: infinite;
 				animation-timing-function: steps(60);
+				
+				animation-play-state: inherit;
 			}
 			
-			.cat-clock__tail {
+			.timer_cat__tail {
 				position: absolute;
 				width: 30px;
 				height: 120px;
@@ -142,27 +162,41 @@
 				animation-duration: 2s;
 				animation-iteration-count: infinite;
 				animation-timing-function: linear;
+				
+				animation-play-state: inherit;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="cat-clock">
-			<div class="cat-clock__head">
-				<div class="cat-clock__ear left-ear"></div>
-				<div class="cat-clock__ear right-ear"></div>
-				<div class="cat-clock__eye left-eye">
-					<div class="cat-clock__pupil left-pupil"></div>
+		<div class="timer_toggler">
+			<div class="timer_cat">
+				<div class="timer_cat__head">
+					<div class="timer_cat__ear left-ear"></div>
+					<div class="timer_cat__ear right-ear"></div>
+					<div class="timer_cat__eye left-eye">
+						<div class="timer_cat__pupil left-pupil"></div>
+					</div>
+					<div class="timer_cat__eye right-eye">
+						<div class="timer_cat__pupil right-pupil"></div>
+					</div>
 				</div>
-				<div class="cat-clock__eye right-eye">
-					<div class="cat-clock__pupil right-pupil"></div>
+				<div class="timer_cat__body">
+					<div class="timer_cat__clock">
+						<div class="timer_cat__sec-arrow"></div>
+					</div>
 				</div>
+				<div class="timer_cat__tail"></div>
 			</div>
-			<div class="cat-clock__body">
-				<div class="cat-clock__clock">
-					<div class="cat-clock__sec-arrow"></div>
-				</div>
-			</div>
-			<div class="cat-clock__tail"></div>
 		</div>
+		<script>
+			let animationToggle = document.querySelector(".timer_toggler");
+			let cat = document.querySelector(".timer_cat");
+
+			animationToggle.addEventListener("click", function() {
+				cat.classList.toggle('animation_stop');
+			});
+			
+			console.log(animationToggle);
+		</script>	
 	</body>
 </html>
