@@ -165,6 +165,25 @@
 				
 				animation-play-state: inherit;
 			}
+			
+			.timer_form {
+				display: block;
+				box-sizing: border-box;
+				width: 180px;
+				height: 30px;
+				margin: 0 auto;
+			}
+			
+			#timer_seconds {
+				padding: 0;
+				margin: 0;
+				border: none;
+				width: 100%;
+				height: 100%;
+				background-color: DodgerBlue;
+				color: white;
+				text-align: center;
+			}
 		</style>
 	</head>
 	<body>
@@ -188,15 +207,24 @@
 				<div class="timer_cat__tail"></div>
 			</div>
 		</div>
+		<label for="timer_seconds" class="timer_form">
+			<input type="number" id="timer_seconds" name="timer_seconds" placeholder="input seconds for timer" min="0" max="300" value="30">
+		</label>
 		<script>
 			let animationToggle = document.querySelector(".timer_toggler");
 			let cat = document.querySelector(".timer_cat");
 
+			cat.classList.toggle('animation_stop'); //init state for cat without moving.
+
 			animationToggle.addEventListener("click", function() {
-				cat.classList.toggle('animation_stop');
+				let timer_sec = document.getElementById('timer_seconds').value;
+				cat.classList.toggle('animation_stop'); //start moving cat
+				setTimeout(
+					(timer_sec) => {
+							cat.classList.toggle('animation_stop'); //stop moving cat
+					}, timer_sec * 1000
+				);
 			});
-			
-			console.log(animationToggle);
 		</script>	
 	</body>
 </html>
